@@ -86,12 +86,19 @@ video {
 
 /* Progress Bar */
 .progress-range {
+  height: 8px;
+  width: calc(100% - 30px);
+  background: rgba(202, 202, 202, 0.5);
   margin: auto;
   border-radius: 10px;
   position: absolute;
   left: 15px;
   top: 15px;
   cursor: pointer;
+  transition: height 0.1s ease-in-out;
+}
+.progress-range:hover {
+  height: 10px;
 }
 
 .progress-bar {
@@ -111,7 +118,7 @@ video {
 
 /* Play & Pause */
 .play-controls {
-  margin-right: 15px;
+  margin-right: 24px;
 }
 
 .fa-play:hover,
@@ -162,16 +169,25 @@ video {
 
 /* Playback Speed */
 .speed {
-  margin-right: 15px;
+  margin-right: 24px;
+}
+
+select,
+option {
+  cursor: pointer;
 }
 
 select {
+  background: transparent;
   color: var(--font-color);
   border: none;
   font-size: 18px;
   position: relative;
   top: -2.5px;
   border-radius: 5px;
+}
+select:focus {
+  outline: none;
 }
 
 select > option {
@@ -182,7 +198,7 @@ select > option {
 
 /* Elapsed Time & Duration */
 .time {
-  margin-right: 15px;
+  margin-right: 24px;
   color: var(--font-color);
   font-weight: bold;
   user-select: none;
