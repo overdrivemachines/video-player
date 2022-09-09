@@ -1,36 +1,49 @@
+@import url("https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;700&display=swap");
 :root {
+  --color-purple: #5437a1;
+  --color-pink: #de3975;
+  --color-text1: #fff;
+  --color-text2: #5b5861;
+
   --primary-color: dodgerblue;
   --font-color: white;
 }
 
 html {
   box-sizing: border-box;
+  background: url(backround.jpg) no-repeat center center fixed;
+  background-size: cover;
 }
 
 body {
   margin: 0;
   min-height: 100vh;
-  background-color: #e3e3e3;
-  background-image: url("data:image/svg+xml,%3Csvg width='6' height='6' viewBox='0 0 6 6' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%234f4f51' fill-opacity='0.4' fill-rule='evenodd'%3E%3Cpath d='M5 0h1L0 6V5zM6 5v1H5z'/%3E%3C/g%3E%3C/svg%3E");
+  /* background-color: #e3e3e3; */
+  /* background-image: url("data:image/svg+xml,%3Csvg width='6' height='6' viewBox='0 0 6 6' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%234f4f51' fill-opacity='0.4' fill-rule='evenodd'%3E%3Cpath d='M5 0h1L0 6V5zM6 5v1H5z'/%3E%3C/g%3E%3C/svg%3E"); */
   display: flex;
   justify-content: center;
   align-items: center;
-  font-family: Helvetica, sans-serif;
+  font-family: "League Spartan", sans-serif;
 }
 
 .fa-solid {
-  color: var(--font-color);
+  color: var(--color-text1);
   font-size: 35px;
+  transition: all 0.3s ease-out;
+}
+.fa-solid:hover {
+  color: var(--color-pink);
 }
 
 .player {
   max-width: 80vw;
   min-width: 800px;
-  border: 5px solid black;
-  border-radius: 10px;
-  background: black;
+  border: 5px solid #0c1013;
+  border-radius: 5px;
+  background: #0c1013;
   position: relative;
   cursor: pointer;
+  color: var(--color-text2);
 }
 
 video {
@@ -55,7 +68,7 @@ video {
   width: 100%;
   height: 95px;
   margin-top: -95px;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(12, 16, 19, 0.7);
   box-sizing: border-box;
   z-index: 5;
   display: flex;
@@ -88,7 +101,7 @@ video {
 .progress-range {
   height: 8px;
   width: calc(100% - 30px);
-  background: rgba(202, 202, 202, 0.5);
+  background: rgba(91, 88, 97, 1);
   margin: auto;
   border-radius: 10px;
   position: absolute;
@@ -102,7 +115,11 @@ video {
 }
 
 .progress-bar {
-  background: var(--primary-color);
+  background-image: linear-gradient(
+    to right,
+    var(--color-purple),
+    var(--color-pink)
+  );
   width: 50%;
   height: 100%;
   border-radius: 10px;
@@ -121,14 +138,7 @@ video {
   margin-right: 24px;
 }
 
-.fa-play:hover,
-.fa-pause:hover {
-  color: var(--primary-color);
-  cursor: pointer;
-}
-
-/* Volume */
-.volume-icon {
+.controls-container .fa-solid {
   cursor: pointer;
 }
 
@@ -144,7 +154,7 @@ video {
 }
 
 .volume-bar {
-  background: var(--font-color);
+  background: var(--color-pink);
   width: 100%;
   height: 100%;
   border-radius: 10px;
@@ -152,7 +162,7 @@ video {
 }
 
 .volume-bar:hover {
-  background: var(--primary-color);
+  background: var(--color-pink);
 }
 
 /* Right Controls ---------------------------- */
@@ -179,29 +189,34 @@ option {
 
 select {
   background: transparent;
-  color: var(--font-color);
+  color: var(--color-text1);
   border: none;
   font-size: 18px;
   position: relative;
   top: -2.5px;
   border-radius: 5px;
+  font-family: "League Spartan", sans-serif;
+  font-weight: bold;
 }
 select:focus {
   outline: none;
 }
 
 select > option {
-  background: rgba(0, 0, 0, 0.9);
+  /* background: rgba(0, 0, 0, 0.9); */
+  background: rgba(12, 16, 19, 0.9);
   border: none;
-  font-size: 14px;
+  font-size: 18px;
+  font-weight: bold;
 }
 
 /* Elapsed Time & Duration */
 .time {
   margin-right: 24px;
-  color: var(--font-color);
+  color: var(--color-text1);
   font-weight: bold;
   user-select: none;
+  font-size: 18px;
 }
 
 /* Fullscreen */
