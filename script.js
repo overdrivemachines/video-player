@@ -47,7 +47,7 @@ function displayTime(time) {
 
 // Update progress bar as video plays
 function updateProgress() {
-  console.log("current time", video.currentTime, "duration", video.duration);
+  // console.log("current time", video.currentTime, "duration", video.duration);
 
   // Set Progress Bar width
   const width = (video.currentTime * 100) / video.duration;
@@ -58,6 +58,17 @@ function updateProgress() {
 
   // Total Length of Video
   duration.textContent = displayTime(video.duration);
+}
+
+// Change time when user clicks on progress bar
+function setProgress(e) {
+  // In an event, this refers to the element that received the event
+  // Find out where user has clicked on the progress bar
+  const width = this.clientWidth;
+
+  const progressPercent = (e.offsetX * 100) / width;
+  video.currentTime = (progressPercent / 100) * video.duration;
+  updateProgress();
 }
 
 // Volume Controls --------------------------- //
@@ -73,3 +84,4 @@ video.addEventListener("click", togglePlay);
 video.addEventListener("ended", showPlayIcon);
 video.addEventListener("timeupdate", updateProgress);
 video.addEventListener("canplay", updateProgress);
+progressRange.addEventListener("click", setProgress);
