@@ -7,3 +7,5 @@ Custom Video Player. Control the functionality with custom UI. UI has the follow
 Live - https://overdrivemachines.github.io/video-player/
 
 ## References
+
+- HTML Audio/Video DOM - https://www.w3schools.com/tags/ref_av_dom.asp
