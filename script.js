@@ -72,16 +72,60 @@ function setProgress(e) {
 }
 
 // Volume Controls --------------------------- //
+// Volume Bar
+function changeVolume(e) {
+  let volume = e.offsetX / volumeRange.offsetWidth;
+  // Round volume. Eg 0.12 becomes 0.1 and 0.96 becomes 1.00
+  volume = Math.round(volume * 10) / 10;
+  // set volume bar
+  volumeBar.style.width = `${volume * 100}%`;
+  // set video player's volume
+  video.volume = volume;
+  // Change icon depending on volume
+  volumeIcon.className = "";
+  if (volume > 0.7) {
+    volumeIcon.classList.add("fa-solid", "fa-volume-high");
+  } else if (volume <= 0.7 && volume > 0) {
+    volumeIcon.classList.add("fa-solid", "fa-volume-low");
+  } else if (volume === 0) {
+    volumeIcon.classList.add("fa-solid", "fa-volume-off");
+  }
+}
+
+let orgVolume = 0.5;
+function toggleMute() {
+  // Check if muted
+  if (volumeIcon.classList.contains("fa-volume-xmark")) {
+    // Unmute volume
+    volumeIcon.className = "";
+    volumeIcon.classList.add("fa-solid", "fa-volume-low");
+    video.volume = orgVolume;
+    console.log(video.volume);
+  } else {
+    // Mute volume
+    volumeIcon.className = "";
+    volumeIcon.classList.add("fa-solid", "fa-volume-xmark");
+    orgVolume = video.volume;
+    video.volume = 0;
+  }
+}
 
 // Change Playback Speed -------------------- //
 
 // Fullscreen ------------------------------- //
 
 // Event Listeners
+// Play/Pause Button
 playBtn.addEventListener("click", togglePlay);
 video.addEventListener("click", togglePlay);
 // On Video End, show play icon
 video.addEventListener("ended", showPlayIcon);
 video.addEventListener("timeupdate", updateProgress);
 video.addEventListener("canplay", updateProgress);
+
+// Jump to time using progress bar
 progressRange.addEventListener("click", setProgress);
+
+// Volume adjustment
+volumeRange.addEventListener("click", changeVolume);
+volumeIcon.addEventListener("click", toggleMute);
