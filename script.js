@@ -18,6 +18,7 @@ const volumeBar = $(".volume-bar");
 const currentTime = $(".time-elapsed");
 const duration = $(".time-duration");
 const fullscreenBtn = $(".fullscreen");
+const speed = $(".player-speed");
 
 // Play & Pause ----------------------------------- //
 function showPlayIcon() {
@@ -72,6 +73,30 @@ function setProgress(e) {
 }
 
 // Volume Controls --------------------------- //
+
+let lastVolume = 0.5;
+
+// Mute/Unmute
+function toggleMute() {
+  // Check if muted
+  if (volumeIcon.classList.contains("fa-volume-xmark")) {
+    // Unmute volume
+    volumeIcon.className = "";
+    volumeIcon.classList.add("fa-solid", "fa-volume-high");
+    video.volume = lastVolume;
+    volumeBar.style.width = `${lastVolume * 100}%`;
+    volumeIcon.setAttribute("title", "Mute");
+  } else {
+    // Mute volume
+    volumeIcon.className = "";
+    volumeIcon.classList.add("fa-solid", "fa-volume-xmark");
+    lastVolume = video.volume;
+    video.volume = 0;
+    volumeBar.style.width = 0;
+    volumeIcon.setAttribute("title", "Unmute");
+  }
+}
+
 // Volume Bar
 function changeVolume(e) {
   let volume = e.offsetX / volumeRange.offsetWidth;
@@ -90,27 +115,13 @@ function changeVolume(e) {
   } else if (volume === 0) {
     volumeIcon.classList.add("fa-solid", "fa-volume-off");
   }
-}
-
-let orgVolume = 0.5;
-function toggleMute() {
-  // Check if muted
-  if (volumeIcon.classList.contains("fa-volume-xmark")) {
-    // Unmute volume
-    volumeIcon.className = "";
-    volumeIcon.classList.add("fa-solid", "fa-volume-low");
-    video.volume = orgVolume;
-    console.log(video.volume);
-  } else {
-    // Mute volume
-    volumeIcon.className = "";
-    volumeIcon.classList.add("fa-solid", "fa-volume-xmark");
-    orgVolume = video.volume;
-    video.volume = 0;
-  }
+  lastVolume = volume;
 }
 
 // Change Playback Speed -------------------- //
+function changeSpeed() {
+  video.playbackRate = speed.value;
+}
 
 // Fullscreen ------------------------------- //
 
@@ -129,3 +140,6 @@ progressRange.addEventListener("click", setProgress);
 // Volume adjustment
 volumeRange.addEventListener("click", changeVolume);
 volumeIcon.addEventListener("click", toggleMute);
+
+// Speed adjustment
+speed.addEventListener("change", changeSpeed);

@@ -9,3 +9,4 @@ Live - https://overdrivemachines.github.io/video-player/
 ## References
 
 - HTML Audio/Video DOM - https://www.w3schools.com/tags/ref_av_dom.asp
+- Change Event - https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/change_event

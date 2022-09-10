@@ -154,27 +154,22 @@ video {
   left: 50px;
   cursor: pointer;
 }
-.volume-range:hover {
-  /* border-radius: 50%; */
-  /* box-shadow: 0 0 20px rgba(145, 92, 182, 1); */
-  /* X Offset, Y Offset, Blur Radius, Spread */
-  /* box-shadow: 0 0 4px 2px var(--color-pink); */
+.volume-range:hover .volume-bar {
+  background: var(--color-pink);
 }
 
 .volume-bar {
-  background-image: linear-gradient(
+  /* background-image: linear-gradient(
     to right,
     var(--color-purple),
     var(--color-pink)
-  );
+  ); */
+  background: var(--color-purple);
   width: 100%;
   height: 100%;
   border-radius: 10px;
-  transition: width 0.2s ease-in;
-}
-
-.volume-bar:hover {
-  /* background: var(--color-pink); */
+  /* transition: width 0.2s ease-in; */
+  transition: all 0.3s ease-out;
 }
 
 /* Right Controls ---------------------------- */
