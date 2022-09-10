@@ -160,11 +160,7 @@ let fullscreen = false;
 // Executed when fullscreen button is clicked.
 // Not executed when ESC key is pressed while in fullscreen mode
 function toggleFullscreen() {
-  if (!fullscreen) {
-    openFullscreen(player);
-  } else {
-    closeFullscreen();
-  }
+  !fullscreen ? openFullscreen(player) : closeFullscreen();
   fullscreen = !fullscreen;
 }
 
