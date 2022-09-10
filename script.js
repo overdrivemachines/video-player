@@ -156,7 +156,9 @@ function closeFullscreen() {
 }
 
 let fullscreen = false;
-// Toggle Fullscreen
+// Toggle Fullscreen.
+// Executed when fullscreen button is clicked.
+// Not executed when ESC key is pressed while in fullscreen mode
 function toggleFullscreen() {
   if (!fullscreen) {
     openFullscreen(player);
@@ -164,6 +166,19 @@ function toggleFullscreen() {
     closeFullscreen();
   }
   fullscreen = !fullscreen;
+}
+
+// This is executed when fullscreen is exited using
+// ESC key and without it (by clicking the fullscreen icon)
+function exitHandler() {
+  if (
+    !document.webkitIsFullScreen &&
+    !document.mozFullScreen &&
+    !document.msFullscreenElement
+  ) {
+    fullscreen = false;
+    video.classList.remove("video-fullscreen");
+  }
 }
 
 // Event Listeners
@@ -187,18 +202,8 @@ speed.addEventListener("change", changeSpeed);
 
 // Fullscreen
 fullscreenBtn.addEventListener("click", toggleFullscreen);
+// When ESC key is pressed to exit fullscreen
 document.addEventListener("fullscreenchange", exitHandler, false);
 document.addEventListener("mozfullscreenchange", exitHandler, false);
 document.addEventListener("MSFullscreenChange", exitHandler, false);
 document.addEventListener("webkitfullscreenchange", exitHandler, false);
-function exitHandler() {
-  if (
-    !document.webkitIsFullScreen &&
-    !document.mozFullScreen &&
-    !document.msFullscreenElement
-  ) {
-    console.log("Exited Fullscreen using ESC key");
-    fullscreen = false;
-    video.classList.remove("video-fullscreen");
-  }
-}
