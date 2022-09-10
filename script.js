@@ -8,6 +8,7 @@ function $(el) {
   }
 }
 
+const player = $(".player");
 const video = $(".video");
 const progressRange = $(".progress-range");
 const progressBar = $(".progress-bar");
@@ -124,6 +125,46 @@ function changeSpeed() {
 }
 
 // Fullscreen ------------------------------- //
+/* View in fullscreen */
+function openFullscreen(elem) {
+  if (elem.requestFullscreen) {
+    elem.requestFullscreen();
+  } else if (elem.webkitRequestFullscreen) {
+    /* Safari */
+    elem.webkitRequestFullscreen();
+  } else if (elem.msRequestFullscreen) {
+    /* IE11 */
+    elem.msRequestFullscreen();
+  }
+  video.classList.add("video-fullscreen");
+  console.log("Entered Fullscreen");
+}
+
+/* Close fullscreen */
+function closeFullscreen() {
+  if (document.exitFullscreen) {
+    document.exitFullscreen();
+  } else if (document.webkitExitFullscreen) {
+    /* Safari */
+    document.webkitExitFullscreen();
+  } else if (document.msExitFullscreen) {
+    /* IE11 */
+    document.msExitFullscreen();
+  }
+  video.classList.remove("video-fullscreen");
+  console.log("Exited Fullscreen");
+}
+
+let fullscreen = false;
+// Toggle Fullscreen
+function toggleFullscreen() {
+  if (!fullscreen) {
+    openFullscreen(player);
+  } else {
+    closeFullscreen();
+  }
+  fullscreen = !fullscreen;
+}
 
 // Event Listeners
 // Play/Pause Button
@@ -143,3 +184,21 @@ volumeIcon.addEventListener("click", toggleMute);
 
 // Speed adjustment
 speed.addEventListener("change", changeSpeed);
+
+// Fullscreen
+fullscreenBtn.addEventListener("click", toggleFullscreen);
+document.addEventListener("fullscreenchange", exitHandler, false);
+document.addEventListener("mozfullscreenchange", exitHandler, false);
+document.addEventListener("MSFullscreenChange", exitHandler, false);
+document.addEventListener("webkitfullscreenchange", exitHandler, false);
+function exitHandler() {
+  if (
+    !document.webkitIsFullScreen &&
+    !document.mozFullScreen &&
+    !document.msFullscreenElement
+  ) {
+    console.log("Exited Fullscreen using ESC key");
+    fullscreen = false;
+    video.classList.remove("video-fullscreen");
+  }
+}
